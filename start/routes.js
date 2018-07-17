@@ -18,6 +18,8 @@ const Route = use('Route')
 Route.on('/').render('welcome')
 
 Route.post('/insertarUser' , 'DatosChatController.AddUser');
+Route.post('/login' , 'DatosChatController.Login');
+
 Route.post('/insertarGroup' , 'DatosChatController.AddGroup');
 Route.post('/insertarChat' , 'DatosChatController.AddChat');
 

@@ -1,12 +1,12 @@
 'use strict'
 const Route = use('Route')
 const Database = use('Database')
-
+const User = use('App/Models/User')
 class DatosChatController {
 
     async GetAllUser() //traer todos los usuarios
     {
-        return await Database.select('*').from('user')
+        return await Database.select('*').from('users')
     }
 
     async GetAllGroups() //traer todos los grupos
@@ -43,22 +43,39 @@ class DatosChatController {
         }
     }
 
-
-    async AddUser({ params, request, response }) //añadir usuario
-    {
-        if (!request.input('usu') || !request.input('email') || request.input('psw') ) {
+    async AddUser({ params, request, response }) {
+        if (!request.input('usu') || !request.input('email') || !request.input('psw') ) {
             return response.json({ status: 200, data: 'Campos vacios' })
         }
         else {
-            return await Database.table('user')
-                .insert({
-                    usuario: request.input('usu'),
-                    password: request.input('email'),
-                    conectado: request.input('psw')
-                }).returning('id')
+            
+
+            const user = new User()
+            user.username = request.input('usu')
+            user.email = request.input('email')
+            user.password = request.input('psw')
+
+           return await user.save()
+            // return await Database.table('users')
+            //     .insert({
+            //         username: request.input('usu'),
+            //         email: request.input('email'),
+            //         password: request.input('psw')
+            //     }).returning('id')
         }
     }
 
+    async Login({ params, request, response,auth }) {
+        if (!request.input('usu') || !request.input('psw') ) {
+            return response.json({ status: 200, data: 'Campos vacios' })
+        }
+        else {
+
+            return  await auth
+            .withRefreshToken()
+            .attempt(request.input('usu'), request.input('psw'))
+        }
+    }
     async UpdateConect({ params, request ,response })//editar conectado
     {
         if (!request.input('conect')) 
