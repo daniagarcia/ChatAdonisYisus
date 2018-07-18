@@ -4,6 +4,10 @@ const Hash = use('Hash')
 const Model = use('Model')
 
 class User extends Model {
+  static get hidden () {
+    return ['password']
+  }
+  
   static boot () {
     super.boot()
 
