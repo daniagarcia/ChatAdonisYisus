@@ -6,10 +6,8 @@ class ChatSchema extends Schema {
   up () {
     this.create('chats', (table) => {
       table.increments()
-      table.string('recivido', 80).notNullable().unique()
-      table.string('enviado', 60).notNullable()
-      table.string('Mensage', 60).notNullable()
-      table.string('fecha', 60).notNullable()
+      table.string('usuarios').notNullable()
+      table.json('mensajes').notNullable()
       table.timestamps()
     })
   }
