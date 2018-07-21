@@ -1,4 +1,6 @@
 'use strict'
+const Chat = use('App/Models/Chat')
+const User = use('App/Models/User')
 
 /**
  * Resourceful controller for interacting with chats
@@ -21,8 +23,29 @@ class ChatController {
   /**
    * Create/save a new chat.
    * POST chats
+   * es para guardar el chat 
    */
   async store ({ request, response }) {
+    
+    var chat = await Chat
+      .query()
+      .where('usuarios', request.input('UsersArray'))
+      .first()
+      return { 
+        sesion: await auth
+            .withRefreshToken()
+            .attempt(request.input('usu'), request.input('psw')),
+        user: await User
+            .query()
+            .where('username',request.input('usu'))
+            .first()
+    }
+    // const chat = new Chat();
+    // user.username = request.input('usu')
+    // user.email = request.input('email')
+    // user.password = request.input('psw')
+
+   return await user.save()
   }
 
   /**
