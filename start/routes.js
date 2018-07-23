@@ -32,6 +32,7 @@ Route.get('/TraerChat/:id' , 'DatosChatController.GetChat');
 
 Route.put('/EditarUsu/:id' , 'DatosChatController.UpdateConect');
 Route.resource('chats','ChatController');
+Route.resource('users','UserController');
 Route.resource('grupos','GrupoController');
 
 
