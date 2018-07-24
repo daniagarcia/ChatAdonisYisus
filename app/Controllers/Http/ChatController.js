@@ -27,10 +27,16 @@ class ChatController {
    */
   async store ({ request, response }) {
     
-    var chat = await Chat
-      .query()
-      .where('usuarios', request.input('UsersArray'))
-      .first()
+    // var chat = await Chat
+    //   .query()
+    //   .where('usuarios', request.input('UsersArray'))
+    //   .first()
+
+      const chat = await Chat.findOrCreate(
+        { usuarios: request.input('UsersArray') },
+        { usuarios: request.input('UsersArray'), mensajes: JSON.stringify([]) }
+      )
+
       return { 
         sesion: await auth
             .withRefreshToken()

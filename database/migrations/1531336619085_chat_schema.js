@@ -7,7 +7,7 @@ class ChatSchema extends Schema {
     this.create('chats', (table) => {
       table.increments()
       table.string('usuarios').notNullable()
-      table.json('mensajes').notNullable()
+      table.json('mensajes')
       table.timestamps()
     })
   }
