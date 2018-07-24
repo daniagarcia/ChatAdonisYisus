@@ -15,26 +15,18 @@
 
 const Ws = use('Ws')
 
-/*Ws.channel('chat', ({ socket }) => {
+Ws.channel('chat',({socket})=>{
+  socket.on('msj:add',(data)=>{
+    socket.broadcast("new:msj",data)
+    console.log('user')
+    console.log(data);
+  });
 
-  socket.on('inicio', (data) => {
-    socket.broadcast('RecivirDisparo', true)
-  })
-  socket.on('disparo', (data) => {
-    socket.broadcast('bala', true)
-  })
-  socket.on('posicion', (data) => {
-    socket.broadcast('pos', true)
-  })
-
-  socket.on('login', (data) => {
-    socket.broadcast('usu', number)
-  })
+  //console.log('user: joined with %s socket id', socket.id)
   
-  
-})*/
+});
 
-//se suscriven y se mantiene la coneccion por canal por array o string
+//se suscriben y se mantiene la coneccion por canal por array o string
 
 Ws.channel('chat', ({ socket }) => {
   socket.emit("new:id",socket.id);
