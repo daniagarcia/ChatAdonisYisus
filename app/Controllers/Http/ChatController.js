@@ -25,18 +25,15 @@ class ChatController {
    * POST chats
    * es para guardar el chat 
    */
-  async store ({ request, response }) {
-    
+  async store ({ request, response }) {    
     // var chat = await Chat
     //   .query()
     //   .where('usuarios', request.input('UsersArray'))
     //   .first()
-
       const chat = await Chat.findOrCreate(
         { usuarios: request.input('UsersArray') },
         { usuarios: request.input('UsersArray'), mensajes: JSON.stringify([]) }
       )
-
       return { 
         sesion: await auth
             .withRefreshToken()
@@ -44,7 +41,12 @@ class ChatController {
         user: await User
             .query()
             .where('username',request.input('usu'))
-            .first()
+            .first(),
+        // chat: await Chat
+        //     .query()
+        //     .where('mensaje',request.input('msj'))
+        //     .first()
+      
     }
     // const chat = new Chat();
     // user.username = request.input('usu')

@@ -1,15 +1,15 @@
 'use strict'
 
 class ChatController {
-  constructor ({ socket, request }) {
+  constructor ( socket, request ) {
     this.socket = socket
-    this.request = request
+    this.request = request    
+  }
 
-    socket.on('message', (data) => {
-    })
-    
-    // emit events
-    socket.emit('id', socket.id)
+
+  onMessage(message){
+    console.log(message)
+    this.socket.emit("message");
   }
 }
 

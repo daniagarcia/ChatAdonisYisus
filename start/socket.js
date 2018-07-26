@@ -14,17 +14,18 @@
 */
 
 const Ws = use('Ws')
+Ws.channel('chat','ChatController');
 
-Ws.channel('chat',({socket})=>{
-  socket.on('msj:add',(data)=>{
-    socket.broadcast("new:msj",data)
-    console.log('user')
-    console.log(data);
-  });
+// Ws.channel('chat',({socket})=>{
+//   socket.on('msj:add',(data)=>{
+//     socket.broadcast("new:msj",data)
+//     console.log('user')
+//     console.log(data);
+//   });
 
-  //console.log('user: joined with %s socket id', socket.id)
+//   //console.log('user: joined with %s socket id', socket.id)
   
-});
+// });
 
 //se suscriben y se mantiene la coneccion por canal por array o string
 
