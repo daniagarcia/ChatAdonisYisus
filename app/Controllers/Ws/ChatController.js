@@ -1,7 +1,7 @@
 'use strict'
 
 class ChatController {
-  constructor ( socket, request ) {
+  constructor ( {socket, request} ) {
     this.socket = socket
     this.request = request    
   }
