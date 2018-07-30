@@ -112,21 +112,21 @@ class DatosChatController {
         }
     }
 
-    async AddChat({ params, request, response }) //añadir usuario
-    {
-        if (!request.input('Nom') || !request.input('inte') || !request.input('mens') || !request.input('fecha')) {
-            return response.json({ status: 200, data: 'Campos vacios' })
-        }
-        else {
-            return await Database.table('chat')
-                .insert({
-                    recivido: request.input('rec'),
-                    enviado: request.input('env'),
-                    mensage: request.input('mens'),
-                    fecha: request.input('fecha'),
-                }).returning('id')
-        }
-    }
+    // async AddChat({ params, request, response }) //añadir usuario
+    // {
+    //     if (!request.input('Nom') || !request.input('inte') || !request.input('mens') || !request.input('fecha')) {
+    //         return response.json({ status: 200, data: 'Campos vacios' })
+    //     }
+    //     else {
+    //         return await Database.table('chat')
+    //             .insert({
+    //                 recivido: request.input('rec'),
+    //                 enviado: request.input('env'),
+    //                 mensage: request.input('mens'),
+    //                 fecha: request.input('fecha'),
+    //             }).returning('id')
+    //     }
+    // }
 }
 
 module.exports = DatosChatController

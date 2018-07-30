@@ -1,6 +1,7 @@
 'use strict'
 const Chat = use('App/Models/Chat')
 const User = use('App/Models/User')
+const Token = use('App/Models/Token')
 
 /**
  * Resourceful controller for interacting with chats
@@ -25,7 +26,7 @@ class ChatController {
    * POST chats
    * es para guardar el chat 
    */
-  async store ({ request, response }) {    
+  async store ({ request, response,auth }) {    
       const chat = await Chat.findOrCreate(
         { usuarios: request.input('UsersArray') },
         { usuarios: request.input('UsersArray'), mensajes: JSON.stringify([]) }
@@ -36,20 +37,23 @@ class ChatController {
             .attempt(request.input('usu'), request.input('psw')),
         user: await User
             .query()
-            .where('username',request.input('usu'))
-            .first(),
-        // chat: await Chat
-        //     .query()
-        //     .where('mensaje',request.input('msj'))
-        //     .first()
+            .where('username',request.input('usu')),
+            // .first(),
+        chats: await Chat
+            .query()
+            .where('mensaje',request.input('user'))
+            // .first()
+          
       
     }
     // const chat = new Chat();
     // user.username = request.input('usu')
     // user.email = request.input('email')
     // user.password = request.input('psw')
-
-   return await user.save()
+    return user.save()
+//   chats.save();
+// return chats.save();
+ //return await user.save(),chats.save()
   }
 
   /**
