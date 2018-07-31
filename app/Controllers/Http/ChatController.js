@@ -31,26 +31,26 @@ class ChatController {
         { usuarios: request.input('UsersArray') },
         { usuarios: request.input('UsersArray'), mensajes: JSON.stringify([]) }
       )
-      return { 
-        sesion: await auth
-            .withRefreshToken()
-            .attempt(request.input('usu'), request.input('psw')),
-        user: await User
-            .query()
-            .where('username',request.input('usu')),
-            // .first(),
-        chats: await Chat
-            .query()
-            .where('mensaje',request.input('user'))
-            // .first()
+    //   return { 
+    //     sesion: await auth
+    //         .withRefreshToken()
+    //         .attempt(request.input('usu'), request.input('psw')),
+    //     user: await User
+    //         .query()
+    //         .where('username',request.input('usu'))
+    //         .first(),
+    //     chats: await Chat
+    //         .query()
+    //         .where('mensaje',request.input('user'))
+    //         // .first()
           
       
-    }
+    // }
     // const chat = new Chat();
     // user.username = request.input('usu')
     // user.email = request.input('email')
     // user.password = request.input('psw')
-    return user.save()
+  //  return   await chats.save()
 //   chats.save();
 // return chats.save();
  //return await user.save(),chats.save()
