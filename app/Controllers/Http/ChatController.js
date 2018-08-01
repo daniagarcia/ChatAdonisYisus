@@ -81,6 +81,9 @@ class ChatController {
    * GET chats/:id
    */
   async show({ params, request, response, view }) {
+
+      return await Database.select('mensajes').from('chats').where('usuarios', params.usuarios).orderby('id')
+  
   }
 
   /**
