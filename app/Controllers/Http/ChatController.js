@@ -2,6 +2,7 @@
 const Chat = use('App/Models/Chat')
 const User = use('App/Models/User')
 const Token = use('App/Models/Token')
+const Database = use('Database')
 
 /**
  * Resourceful controller for interacting with chats
@@ -82,7 +83,7 @@ class ChatController {
    */
   async show({ params, request, response, view }) {
 
-      return await Database.select('mensajes').from('chats').where('usuarios', params.usuarios).orderby('id')
+      return await Database.select('mensajes').from('chats').where('usuarios','=', params.id).orderBy('usuarios')
   
   }
 
