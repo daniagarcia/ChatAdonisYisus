@@ -14,7 +14,7 @@
 */
 
 const Ws = use('Ws')
-Ws.channel('chat','ChatController');
+Ws.channel('chat:*','ChatController');
 
 // Ws.channel('chat',({socket})=>{
 //   socket.on('msj:add',(data)=>{
