@@ -8,6 +8,7 @@ class ChatSchema extends Schema {
       table.increments()
       table.string('usuarios').notNullable()
       table.json('mensajes')
+      table.integer('id_usuario')
       table.timestamps()
     })
   }

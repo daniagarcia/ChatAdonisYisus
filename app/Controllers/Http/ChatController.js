@@ -37,6 +37,7 @@ class ChatController {
     const chat = new Chat();
     chat.usuarios = request.input('UsersArray');
     chat.mensajes = JSON.stringify(request.input('mensaje'))
+    chat.id_usuario= request.input('id_usuario')
 
     //  JSON.stringify([request.input('msj')]) 
     
@@ -83,7 +84,7 @@ class ChatController {
    */
   async show({ params, request, response, view }) {
 
-      return await Database.select('mensajes').from('chats').where('usuarios','=', params.id).orderBy('usuarios')
+      return await Database.select('mensajes','id_usuario').from('chats').where('usuarios','=', params.id).orderBy('usuarios')
   
   }
 

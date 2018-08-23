@@ -8,19 +8,13 @@ class ChatController {
 
 
   onMessage(message){
-    console.log(message)
-    console.log(this.socket.topic)
-
     this.socket.broadcastToAll("message",message);
   }
 
-  // onOpen(message){
-  //   this.socket.broadcastToAll("message","acabo de entrar");
-  // }
+  onEntrar(message){
+    this.socket.broadcastToAll("entrar","acabo de entrar :ds");
+  }
 
-  // onClose(message){
-  //   this.socket.broadcastToAll("message","acabo de salir");
-  // }
 }
 
 module.exports = ChatController
