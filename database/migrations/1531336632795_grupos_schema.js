@@ -7,7 +7,7 @@ class GruposSchema extends Schema {
     this.create('grupos', (table) => {
       table.increments()
       table.string('nombre', 60).notNullable().unique()
-      table.json('mensajes').notNullable(),
+     
       table.integer('id_usuarios')
       table.timestamps()
     })

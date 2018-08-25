@@ -1,5 +1,5 @@
 'use strict'
-
+const Grupo = use('App/Models/Grupo')
 /**
  * Resourceful controller for interacting with grupos
  */
@@ -23,6 +23,13 @@ class GrupoController {
    * POST grupos
    */
   async store ({ request, response }) {
+    const nombreGrupo = request.input('grupo')
+    const grupo = new Grupo();
+    grupo.nombre = nombreGrupo
+    grupo.id_usuarios=request.input('id_user')
+    await grupo.save()
+
+
   }
 
   /**
@@ -30,6 +37,8 @@ class GrupoController {
    * GET grupos/:id
    */
   async show ({ params, request, response, view }) {
+    return await Database.select('id','nombre','id_usuarios').from('grupos').where('id_usuarios','=', params.id).orderBy('id_usuarios')
+
   }
 
   /**
