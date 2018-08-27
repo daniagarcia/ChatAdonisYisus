@@ -96,7 +96,7 @@ class ChatController {
   }
 
   /**
-   * Update chat details.
+   * Update chat details. 
    * PUT or PATCH chats/:id
    */
   async update({ params, request, response }) {
