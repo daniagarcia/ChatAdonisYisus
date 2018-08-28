@@ -1,4 +1,8 @@
 'use strict'
+const Database = use('Database')
+
+
+
 const Grupo = use('App/Models/Grupo')
 /**
  * Resourceful controller for interacting with grupos
