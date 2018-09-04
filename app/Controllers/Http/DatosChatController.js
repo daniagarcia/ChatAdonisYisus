@@ -66,6 +66,8 @@ class DatosChatController {
     }
 
     async Login({ params, request, response,auth }) {
+        console.log("Entro aqui")
+        console.log(request.input('usu'))
         if (!request.input('usu') || !request.input('psw') ) {
             return response.json({ status: 200, data: 'Campos vacios' })
         }

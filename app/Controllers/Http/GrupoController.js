@@ -1,9 +1,8 @@
 'use strict'
 const Database = use('Database')
-
-
-
 const Grupo = use('App/Models/Grupo')
+
+const GrupoUsers = use('App/Models/GruposUsers')
 /**
  * Resourceful controller for interacting with grupos
  */
@@ -30,10 +29,14 @@ class GrupoController {
     const nombreGrupo = request.input('grupo')
     const grupo = new Grupo();
     grupo.nombre = nombreGrupo
-    grupo.id_usuarios=request.input('id_user')
+    grupo.id_usuarios = request.input('id_user')
     await grupo.save()
 
+    const grupoUser = new GrupoUsers()
+    grupoUser.user_id = request.input('id_user')
+    grupoUser.grupo_id = grupo.id
 
+    await grupoUser.save();
   }
 
   /**

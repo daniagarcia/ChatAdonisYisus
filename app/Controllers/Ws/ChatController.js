@@ -8,7 +8,7 @@ class ChatController {
 
 
   onMessage(message){
-    this.socket.broadcast("message",message);
+    this.socket.broadcastToAll("message",message);
   }
 
   onEntrar(message){
