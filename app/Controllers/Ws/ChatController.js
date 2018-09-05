@@ -8,6 +8,8 @@ class ChatController {
 
 
   onMessage(message){
+    console.log(this.socket.topic)
+    console.log(message)
     this.socket.broadcastToAll("message",message);
   }
 

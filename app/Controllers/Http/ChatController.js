@@ -32,8 +32,6 @@ class ChatController {
    * es para guardar el chat 
    */
   async store({ request, response, auth }) {
-
-    console.log(request.input('mensaje'))
     const chat = new Chat();
     chat.usuarios = request.input('UsersArray');
     chat.mensajes = JSON.stringify(request.input('mensaje'))
