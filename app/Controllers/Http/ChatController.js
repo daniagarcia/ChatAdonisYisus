@@ -13,10 +13,9 @@ class ChatController {
    * GET chats
    */
   async index({ request, response, view }) {
-
-    Route.get('users', async () => {
-      return await User.all()
-    })
+      return await Database.select('chats.mensajes','users.username')
+      .table('chats')
+      .join('users','users.id','chats.id_usuario').orderBy('chats.id')
   }
 
   /**
