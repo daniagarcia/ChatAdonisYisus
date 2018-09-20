@@ -10,7 +10,7 @@ class ChatSchema extends Schema {
       table.json('mensajes')
       table.integer('id_usuario')
       table.timestamps()
-      // table.string('archivos')
+      table.string('archivos')
     })
   }
 
