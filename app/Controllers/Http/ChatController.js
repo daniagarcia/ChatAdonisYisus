@@ -31,10 +31,20 @@ class ChatController {
    * es para guardar el chat 
    */
   async store({ request, response, auth }) {
+
+    
+
     const chat = new Chat();
+   
     chat.usuarios = request.input('UsersArray');
     chat.mensajes = JSON.stringify(request.input('mensaje'))
     chat.id_usuario= request.input('id_usuario')
+    const file = request.file('file',{
+      types: [
+        'image', 'video', 'audio'
+      ],
+      size: '100mb'
+    })
 
     //  JSON.stringify([request.input('msj')]) 
     
