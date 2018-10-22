@@ -32,57 +32,38 @@ class ChatController {
    */
   async store({ request, response, auth }) {
 
-    
+  
 
     const chat = new Chat();
-   
+    const Helpers = use ('Helpers')
     chat.usuarios = request.input('UsersArray');
     chat.mensajes = JSON.stringify(request.input('mensaje'))
     chat.id_usuario= request.input('id_usuario')
+
     const file = request.file('file',{
       types: [
         'image', 'video', 'audio'
       ],
       size: '100mb'
     })
+    console.log(file)
 
-    //  JSON.stringify([request.input('msj')]) 
+    await file.move(Helpers.tamPath('uploads',{
+      name:'recibidos.jpg',
+      overwrite:true
+    }))
+  
+      if(!file.moved()) {
+        return file.error()
+      }
+      return 'file moved'
+
+    
+    
+    //  JSON.stringify([request.input('msj')])
     
     await chat.save()
-    // await Chat.findOrCreate(
-    //     { usuarios: request.input('username') },
-    //     { usuarios: request.input('UsersArray'), mensajes: JSON.stringify([]) }
-    // )
-   // chat.mensajes= request.input('msj')
-    // user.password = 'some-password'
 
-    // const chat = await Chat.findOrCreate(
-    //   { usuarios: request.input('UsersArray') },       
-    //   { usuarios: request.input('UsersArray'), mensajes: JSON.stringify([]) }
-    // )
-    // return { 
-    //   sesion: await auth
-    //       .withRefreshToken()
-    //       .attempt(request.input('usu'), request.input('psw')),
-    //   user: await User
-    //       .query()
-    //       .where('username',request.input('usu'))
-    //       .first(),
-    //   chats: await Chat
-    //       .query()
-    //       .where('mensaje',request.input('user'))
-    //       // .first()
-
-
-    //  }
-    // const chat = new Chat();
-    // user.username = request.input('usu')
-    // user.email = request.input('email')
-    // user.password = request.input('psw')
-    //  return   await chats.save()
-    //   chats.save();
-    // return chats.save();
-    // return await user.save(), chats.save()
   }
 
   /**
