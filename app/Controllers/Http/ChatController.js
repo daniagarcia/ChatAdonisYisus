@@ -3,6 +3,8 @@ const Chat = use('App/Models/Chat')
 const User = use('App/Models/User')
 const Token = use('App/Models/Token')
 const Database = use('Database')
+const Helpers = use('Helpers')
+
 
 /**
  * Resourceful controller for interacting with chats
@@ -35,10 +37,12 @@ class ChatController {
   
 
     const chat = new Chat();
-    const Helpers = use ('Helpers')
+ 
     chat.usuarios = request.input('UsersArray');
     chat.mensajes = JSON.stringify(request.input('mensaje'))
     chat.id_usuario= request.input('id_usuario')
+    const Helpers = use ('Helpers')
+    const tmpPath = Helpers.tmpPath()
 
     const file = request.file('file',{
       types: [
@@ -46,12 +50,16 @@ class ChatController {
       ],
       size: '100mb'
     })
-    console.log(file)
+    console.log(request)
+    const { message } = await request.all()
+    const messageParse = JSON.parse(message) 
 
-    await file.move(Helpers.tamPath('uploads',{
-      name:'recibidos.jpg',
-      overwrite:true
-    }))
+    if(file){
+      await file.move(Helpers.publicPath('src'),{
+        name:`${new Date().getTime()}.${file.subtype}`,
+        overwrite:true
+      })
+    }    
   
       if(!file.moved()) {
         return file.error()
