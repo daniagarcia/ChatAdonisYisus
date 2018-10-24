@@ -32,10 +32,7 @@ class ChatController {
    * POST chats
    * es para guardar el chat 
    */
-  async store({ request, response, auth }) {
-
-  
-
+  async store({ request, response, auth }) { 
     const chat = new Chat();
  
     chat.usuarios = request.input('UsersArray');
@@ -59,17 +56,11 @@ class ChatController {
         name:`${new Date().getTime()}.${file.subtype}`,
         overwrite:true
       })
-    }    
-  
+    }      
       if(!file.moved()) {
         return file.error()
       }
-      return 'file moved'
-
-    
-    
-    //  JSON.stringify([request.input('msj')])
-    
+      return 'file moved'    
     await chat.save()
 
   }
