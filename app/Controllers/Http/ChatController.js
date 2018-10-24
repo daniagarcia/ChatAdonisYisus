@@ -32,13 +32,15 @@ class ChatController {
    * POST chats
    * es para guardar el chat 
    */
-  async store({ request, response, auth }) { 
+  async store({ request, response, auth, params }) { 
     const chat = new Chat(); 
+    const Helpers = use ('Helpers')
+    const tmpPath = Helpers.tmpPath()
     chat.usuarios = request.input('UsersArray');
     chat.mensajes = JSON.stringify(request.input('mensaje'))
     chat.id_usuario= request.input('id_usuario')
-    const Helpers = use ('Helpers')
-    const tmpPath = Helpers.tmpPath()
+    // chat.archivos= request.input('files')
+   
 
     const file = request.file('files',{
       types: [
@@ -50,13 +52,14 @@ class ChatController {
     // const { message } = await request.all()
     // const messageParse = JSON.parse(message) 
     if (file) {
+      console.log("Entro a la condicion") 
       await file.move(Helpers.publicPath('src'), {
         name: `${new Date().getTime()}.${file.subtype}`   
       })
     }
 
     // if(file){
-    //   await file.move(Helpers.publicPath('src'),{
+    //   await file.move(Helpers.publicPath('src'),{  
     //     name:`${new Date().getTime()}.${file.subtype}`,
     //     overwrite:true
     // //   })
