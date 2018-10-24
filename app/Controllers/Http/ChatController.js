@@ -42,7 +42,7 @@ class ChatController {
     // chat.archivos= request.input('files')
    
 
-    const file = request.file('files',{
+    const file = request.file('file',{
       types: [
         'image', 'video', 'audio'
       ],
