@@ -33,34 +33,38 @@ class ChatController {
    * es para guardar el chat 
    */
   async store({ request, response, auth }) { 
-    const chat = new Chat();
- 
+    const chat = new Chat(); 
     chat.usuarios = request.input('UsersArray');
     chat.mensajes = JSON.stringify(request.input('mensaje'))
     chat.id_usuario= request.input('id_usuario')
     const Helpers = use ('Helpers')
     const tmpPath = Helpers.tmpPath()
 
-    const file = request.file('file',{
+    const file = request.file('files',{
       types: [
         'image', 'video', 'audio'
       ],
       size: '100mb'
     })
     console.log(request)
-    const { message } = await request.all()
-    const messageParse = JSON.parse(message) 
-
-    if(file){
-      await file.move(Helpers.publicPath('src'),{
-        name:`${new Date().getTime()}.${file.subtype}`,
-        overwrite:true
+    // const { message } = await request.all()
+    // const messageParse = JSON.parse(message) 
+    if (file) {
+      await file.move(Helpers.publicPath('src'), {
+        name: `${new Date().getTime()}.${file.subtype}`   
       })
-    }      
-      if(!file.moved()) {
-        return file.error()
-      }
-      return 'file moved'    
+    }
+
+    // if(file){
+    //   await file.move(Helpers.publicPath('src'),{
+    //     name:`${new Date().getTime()}.${file.subtype}`,
+    //     overwrite:true
+    // //   })
+    // // }      
+    //   if(!file.moved()) {
+    //     return file.error()
+    //   }
+    //   return 'file moved'    
     await chat.save()
 
   }
