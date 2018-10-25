@@ -4,7 +4,7 @@ const User = use('App/Models/User')
 const Token = use('App/Models/Token')
 const Database = use('Database')
 const Helpers = use('Helpers')
-
+const File = use('App/Models/File')
 
 /**
  * Resourceful controller for interacting with chats
@@ -34,29 +34,69 @@ class ChatController {
    */
   async store({ request, response, auth, params }) { 
     const chat = new Chat(); 
-    const Helpers = use ('Helpers')
-    const tmpPath = Helpers.tmpPath()
+    // const Helpers = use ('Helpers')
+    // const tmpPath = Helpers.tmpPath()
     chat.usuarios = request.input('UsersArray');
     chat.mensajes = JSON.stringify(request.input('mensaje'))
     chat.id_usuario= request.input('id_usuario')
+
+    const file = request.input('file', {
+      types: ['jpg','jpeg','png', 'gif','svg'],
+      size: '1024mb'
+    })
+    
+    const fileName = `${new Date().getTime()}.${file.subtype}`
+   
+    file.move(Helpers.publicPath('/files'), {
+      name: `${new Date().getTime()}.${file.subtype}`
+    })
+
+
+
+
+
+
     // chat.archivos= request.input('files')
+
+  //  const user = await auth.getUser();
+		// const file = request.file('file', {
+		// 	types: ['audio','image','video'],
+		// 	size: '1000mb'
+    //     })
+    //     console.log(file)
+		// const type = file.type
+		
+		// const newFile = new File()
+		// newFile.user_id = user.id
+
+		// const fileName = `${new Date().getTime()}.${file.subtype}`
+		// await file.move(Helpers.publicPath('files'), {
+		// 	name: fileName
+		// })
+		// if(!file.moved()) {
+		// 	return response.json({success: false, msg: 'Archivo no valido'})
+		// }
+		// newFile.route = 'files' + fileName
+		// await newFile.save()
+		// aqui retorno la ruta del archivo y el formato del archivo
+		// return response.json({url: newFile.route, type: type})
    
 
-    const file = request.file('file',{
-      types: [
-        'image', 'video', 'audio'
-      ],
-      size: '100mb'
-    })
-    console.log(request)
+    // const file = request.file('file',{
+    //   types: [
+    //     'image', 'video', 'audio'
+    //   ],
+    //   size: '100mb'
+    // })
+    // console.log(request)
     // const { message } = await request.all()
     // const messageParse = JSON.parse(message) 
-    if (file) {
-      console.log("Entro a la condicion") 
-      await file.move(Helpers.publicPath('src'), {
-        name: `${new Date().getTime()}.${file.subtype}`   
-      })
-    }
+    // if (file) {
+    //   console.log("Entro a la condicion") 
+    //   await file.move(Helpers.publicPath('src'), {
+    //     name: `${new Date().getTime()}.${file.subtype}`   
+    //   })
+    // }
 
     // if(file){
     //   await file.move(Helpers.publicPath('src'),{  
