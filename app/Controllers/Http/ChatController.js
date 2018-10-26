@@ -40,16 +40,16 @@ class ChatController {
     chat.mensajes = JSON.stringify(request.input('mensaje'))
     chat.id_usuario= request.input('id_usuario')
 
-    const file = request.input('file', {
-      types: ['jpg','jpeg','png', 'gif','svg'],
-      size: '1024mb'
-    })
+    // const file = request.input('file', {
+    //   types: ['jpg','jpeg','png', 'gif','svg'],
+    //   size: '1024mb'
+    // })
     
-    const fileName = `${new Date().getTime()}.${file.subtype}`
+    // const fileName = `${new Date().getTime()}.${file.subtype}`
    
-    file.move(Helpers.publicPath('/files'), {
-      name: `${new Date().getTime()}.${file.subtype}`
-    })
+    // file.move(Helpers.publicPath('/files'), {
+    //   name: `${new Date().getTime()}.${file.subtype}`
+    // })
 
 
 

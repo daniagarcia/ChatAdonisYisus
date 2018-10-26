@@ -35,7 +35,7 @@ Route.resource('chats','ChatController');
 Route.resource('users','UserController');
 Route.resource('grupos','GrupoController');
 Route.resource('gruposusers','GrupoUsuarioController');
-
+Route.post('/archivos' , 'ArchivoController.archivos');
  
 
 
