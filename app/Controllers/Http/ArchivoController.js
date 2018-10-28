@@ -4,12 +4,9 @@ const Chat = use('App/Models/Chat')
 const Helpers = use("Helpers");
 class ArchivoController {
     async archivos({ request, response  }) {
-      console.log("peticion",request.all());
-      console.log("prueba",request.input('id_usu'));
-      const chat = new Chat(); 
+     const chat = new Chat(); 
       chat.usuarios = request.input('UsersArray');      
-      chat.id_usuario= request.input('id_usuario')
-      
+      chat.id_usuario= request.input('id_usuario')     
     
 
     const file = request.file('file', {
@@ -18,8 +15,7 @@ class ArchivoController {
       size: '1024mb'
     })
 
-    console.log(file)
-    
+     
  const    fileName = `${new Date().getTime()}.${file.subtype}`
    
     file.move(Helpers.publicPath('/assets/archivos/'), {

@@ -15,7 +15,7 @@ class ChatController {
    * GET chats
    */
   async index({ request, response, view }) {
-      return await Database.select('chats.mensajes','users.username')
+      return await Database.select('chats.mensajes','users.username', 'chats.file')
       .table('chats')
       .join('users','users.id','chats.id_usuario').orderBy('chats.id')
   }
@@ -47,7 +47,7 @@ class ChatController {
    */
   async show({ params, request, response, view }) {
 
-      return await Database.select('mensajes','id_usuario').from('chats').where('usuarios','=', params.id).orderBy('usuarios')
+      return await Database.select('mensajes','id_usuario','file').from('chats').where('usuarios','=', params.id).orderBy('usuarios')
   
   }
 

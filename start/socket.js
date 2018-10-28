@@ -61,5 +61,5 @@ Ws.channel('chat:*','ChatController');
 
 
 
-//nombre datos collback
+//nombre datos callback
 
