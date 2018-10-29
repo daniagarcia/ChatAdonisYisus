@@ -21,7 +21,9 @@ class ArchivoController {
     file.move(Helpers.publicPath('/assets/archivos/'), {
       name: `${new Date().getTime()}.${file.subtype}`
     })
-    chat.file = '/assets/archivos/'+fileName;
+    const separacion = fileName.split(".");
+    
+    chat.file = { url : '/assets/archivos/'+fileName, format: separacion[1]};
 
     await chat.save()
 }
@@ -29,5 +31,4 @@ class ArchivoController {
  
 
 module.exports = ArchivoController
-
 
