@@ -32,4 +32,3 @@ class ArchivoController {
 
 module.exports = ArchivoController
 
-
